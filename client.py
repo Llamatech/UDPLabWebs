@@ -100,7 +100,8 @@ class SendMessagesThread(QThread):
             message['sequence_num'] = i + 1
             message['timestamp'] = datetime.datetime.now().isoformat()
             data = ','.join([str(message[k]) for k in message_header])
-            self.sock.sendto(bytes(data + "\n", "utf-8"), (host, port))
+            self.sock.sendto(bytes(data, "utf-8"), (self.host,
+                                                    self.port))
             self.sig_current_message.emit(i, self.num_messages)
 
 
@@ -176,9 +177,9 @@ class FileDownloaderWidget(QWidget):
         self.port = port
         self.thread = None
 
-        self.host_selector = QComboBox(self)
-        self.host_selector.setEditable(True)
-        self.host_selector.setEditText(host)
+        self.host_selector = QLineEdit(self)
+        # self.host_selector.setEditable(True)
+        # self.host_selector.setEditText(host)
         vlayout1 = QVBoxLayout()
         vlayout1.addWidget(QLabel("Server Host", self))
         vlayout1.addWidget(self.host_selector)
@@ -229,7 +230,8 @@ class FileDownloaderWidget(QWidget):
         self.stop_and_reset_thread()
         message = self.message_input.text()
         num_messages = self.num_messages.value()
-        host = self.host_selector.currentText()
+        host = self.host_selector.text()
+        print(host)
         port = self.port_spinner.value()
         self.progress_bar.set_bounds(0, num_messages)
         self.thread = SendMessagesThread(self)

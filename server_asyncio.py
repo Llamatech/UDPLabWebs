@@ -11,6 +11,8 @@ parser.add_argument('--port',
                     default=10000,
                     help="UDP port to be listened")
 
+events = []
+
 
 class EchoServerProtocol:
     def connection_made(self, transport):
@@ -18,6 +20,7 @@ class EchoServerProtocol:
 
     def datagram_received(self, data, addr):
         message = data.decode()
+        events.append(message)
         print('Received %r from %s - %s' % (message, addr,
                                             datetime.datetime.now()))
         # print('Send %r to %s' % (message, addr))
@@ -40,5 +43,6 @@ if __name__ == '__main__':
         loop.run_forever()
     except KeyboardInterrupt:
         pass
+    print(events)
     transport.close()
     loop.close()
