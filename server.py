@@ -14,6 +14,8 @@ parser.add_argument('--port',
                     default=10000,
                     help="UDP port to be listened")
 
+exchange = {}
+
 
 class UDPHandler(socketserver.BaseRequestHandler):
     """
@@ -25,10 +27,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
         data = self.request[0].strip()
-        socket = self.request[1]
+        # socket = self.request[1]
         print("{} wrote:".format(self.client_address[0]))
         print(data)
-        socket.sendto(data.upper(), self.client_address)
+        # print(exchange)
+        # socket.sendto(data.upper(), self.client_address)
 
 
 class ThreadedUDPServer(socketserver.ForkingMixIn, socketserver.UDPServer):
