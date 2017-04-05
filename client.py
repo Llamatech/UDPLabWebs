@@ -178,6 +178,7 @@ class FileDownloaderWidget(QWidget):
         self.thread = None
 
         self.host_selector = QLineEdit(self)
+        self.host_selector.setText(host)
         # self.host_selector.setEditable(True)
         # self.host_selector.setEditText(host)
         vlayout1 = QVBoxLayout()
