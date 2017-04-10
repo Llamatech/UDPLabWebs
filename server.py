@@ -67,6 +67,7 @@ class EchoServerProtocol:
         # print(self.transport.get_extra_info('socket'))
         print(bufsize)
         sock = self.transport.get_extra_info('socket')
+        sock.settimeout(5.0)
         # snd_bufsize = sock.getsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF)
         # print(snd_bufsize)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, bufsize)
