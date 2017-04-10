@@ -448,6 +448,7 @@ class FileUploaderWidget(QWidget):
     def start_upload(self):
         print("Transfer messages!")
         self.stop_and_reset_thread()
+        host, port = self.host_selector.get_host_info()
         path, size = self.file_selector.get_selected_file()
         bufsize = self.file_selector.get_bufsize()
         self.progress_bar.set_bounds(0, size)

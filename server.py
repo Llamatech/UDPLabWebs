@@ -166,7 +166,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     HOST, PORT = '0.0.0.0', int(args.port)
-    bufsize = args.bufsize
+    bufsize = int(args.bufsize)
     loop = asyncio.get_event_loop()
     print("Starting UDP server")
     # One protocol instance will be created to serve all client requests
