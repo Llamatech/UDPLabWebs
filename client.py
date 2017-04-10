@@ -159,6 +159,7 @@ class FileUploadThread(QThread):
 
                 self.sock.sendto(bytes(data, "utf-8"), (self.host,
                                                         self.port))
+                self.sock.settimeout(5.0)
                 received = str(self.sock.recv(2048), "utf-8")
 
                 assert received == 'ACK'
