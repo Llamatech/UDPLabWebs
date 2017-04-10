@@ -183,5 +183,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
     # print(events)
+    for addr in events:
+        generate_report(addr)
     transport.close()
     loop.close()
